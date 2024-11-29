@@ -22,7 +22,7 @@ const placeOrder = async (req, res) => {
     const options = {
       amount: Number(req.body.amount * 100),
       currency: "INR",
-      receipt: "BILL1234",
+      receipt: "BILL5678",
     };
 
     razorpayInstance.orders.create(options, async (error, order) => {

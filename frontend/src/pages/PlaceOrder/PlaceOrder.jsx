@@ -5,8 +5,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, foodList, cartItems, url, token } =
-    useContext(StoreContext);
+  const {
+    getTotalCartAmount,
+    foodList,
+    cartItems,
+    url,
+    token,
+    setCartItems,
+    RAZORPAY_KEY_ID,
+  } = useContext(StoreContext);
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -46,6 +53,50 @@ const PlaceOrder = () => {
     console.log(token);
     if (res.data.success) {
       const { session_url, data } = res.data;
+
+      // const options = {
+      //   key: RAZORPAY_KEY_ID,
+      //   amount: data.amount,
+      //   currency: data.currency,
+      //   name: "Sudipta Samanta",
+      //   description: "Test Mode",
+      //   order_id: data.id,
+      //   handler: async (response) => {
+      //     console.log("response", response);
+      //     try {
+      //       const res = await fetch(`${url}/api/order/verify`, {
+      //         method: "POST",
+      //         headers: {
+      //           "content-type": "application/json",
+      //           token: token,
+      //         },
+      //         body: JSON.stringify({
+      //           // razorpay_order_id: response.razorpay_order_id,
+      //           // razorpay_payment_id: response.razorpay_payment_id,
+      //           // razorpay_signature: response.razorpay_signature,
+      //           // orderId: orderId,
+      //           // success: success,
+      //         }),
+      //       });
+
+      //       const verifyData = await res.json();
+
+      //       if (verifyData.message) {
+      //         // toast.success(verifyData.message);
+      //         setCartItems({});
+      //         navigate("/myorders");
+      //       }
+      //     } catch (error) {
+      //       console.log(error);
+      //     }
+      //   },
+      //   theme: {
+      //     color: "#5f63b8",
+      //   },
+      // };
+      // const rzp1 = new window.Razorpay(options);
+
+      // rzp1.open();
 
       // window.location.replace(session_url);
       navigate(session_url, { state: data });

@@ -46,9 +46,7 @@ const Verify = () => {
               success: success,
             }),
           });
-
           const verifyData = await res.json();
-
           if (verifyData.message) {
             // toast.success(verifyData.message);
             setCartItems({});
@@ -58,11 +56,19 @@ const Verify = () => {
           console.log(error);
         }
       },
+      modal: {
+        ondismiss: function () {
+          navigate("/cart");
+        },
+      },
       theme: {
         color: "#5f63b8",
       },
     };
     const rzp1 = new window.Razorpay(options);
+    rzp1.on("payment.failed", () => {
+      navigate("/failed");
+    });
     rzp1.open();
   };
   useEffect(() => {

@@ -3,16 +3,17 @@ import { assets } from "../../assets/assets";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../Contexts/StoreContext";
-import locationImage from "../../assets/location.png";
 
 const Navbar = ({ setLogInPopup }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, setCartItems } =
+    useContext(StoreContext);
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    setCartItems({});
     navigate("/");
   };
 
@@ -21,12 +22,6 @@ const Navbar = ({ setLogInPopup }) => {
       <Link to="/">
         <img className="logo" src={assets.logo} alt="" />
       </Link>
-      <div className="location-block">
-        <img className="location" src={locationImage} alt="" />
-        <p className="location-city">
-          {/* {location !== null ? location : "India"} */}
-        </p>
-      </div>
       <ul className="navbar-menu">
         <Link
           to="/"

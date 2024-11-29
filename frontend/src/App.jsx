@@ -9,6 +9,7 @@ import Verify from "./components/Verify/Verify";
 import { useState } from "react";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import FailedPayments from "./components/FailedPayments/FailedPayments";
 const App = () => {
   const [logInPopup, setLogInPopup] = useState(false);
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/myorders" element={<MyOrders />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/failed" element={<FailedPayments />} />
         </Routes>
         <Footer />
       </div>
