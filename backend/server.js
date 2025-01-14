@@ -22,6 +22,9 @@ app.use(cors());
 connectDB();
 
 // api endpoints
+app.get("/", (req, res) => {
+  res.send("server working");
+});
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/images", express.static("uploads"));
