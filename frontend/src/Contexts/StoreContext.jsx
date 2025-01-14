@@ -8,7 +8,7 @@ const StoreContextProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [foodList, setFoodList] = useState([]);
   // const [location, setLocation] = useState(null);
-  const url = "http://localhost:4000";
+  const url = "https://food-del-backend-ujaf.onrender.com";
   const RAZORPAY_KEY_ID = "rzp_test_8HM6TN5GrALT7Z";
   // const API_KEY = "AIzaSyB-kNa4RgdvkA_5tFb7F-rTeO0JdiqjPA4";
   const addToCart = async (itemId) => {
