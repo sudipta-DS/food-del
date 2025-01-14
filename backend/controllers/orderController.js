@@ -10,12 +10,7 @@ var razorpayInstance = new Razorpay({
 const placeOrder = async (req, res) => {
   try {
     const url = "http://localhost:5173";
-    const newOrder = await orderModel.create({
-      userId: req.body.userId,
-      items: req.body.items,
-      amount: req.body.amount,
-      address: req.body.address,
-    });
+    // console.log(req.body);
 
     // console.log(typeof req.body.amount);
 
@@ -28,12 +23,18 @@ const placeOrder = async (req, res) => {
     razorpayInstance.orders.create(options, async (error, order) => {
       if (error) {
         console.log(error);
-        res.status.json({
+        res.status(400).json({
           success: false,
           message: "error",
           session_url: `/verify/?success=false&orderId=${newOrder._id}`,
         });
       }
+      const newOrder = await orderModel.create({
+        userId: req.body.userId,
+        items: req.body.items,
+        amount: req.body.amount,
+        address: req.body.address,
+      });
       res.status(200).json({
         success: true,
         message: "order successful",
@@ -52,6 +53,7 @@ const placeOrder = async (req, res) => {
 
 const verifyOrder = async (req, res) => {
   const { success, orderId } = req.body;
+  console.log(req.body);
   try {
     if (success === "true") {
       await orderModel.findByIdAndUpdate(orderId, { payment: true });
@@ -80,7 +82,7 @@ const userOrders = async (req, res) => {
 
 const listOrders = async (req, res) => {
   try {
-    const orders = await orderModel.find({});
+    const orders = await orderModel.find({ payment: true });
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);

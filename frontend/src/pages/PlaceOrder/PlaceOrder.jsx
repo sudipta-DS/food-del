@@ -5,15 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
-  const {
-    getTotalCartAmount,
-    foodList,
-    cartItems,
-    url,
-    token,
-    setCartItems,
-    RAZORPAY_KEY_ID,
-  } = useContext(StoreContext);
+  const { getTotalCartAmount, foodList, cartItems, url, token } =
+    useContext(StoreContext);
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -203,17 +196,17 @@ const PlaceOrder = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>₹{getTotalCartAmount()}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${2}</p>
+              <p>₹{2}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount() + 2}</b>
+              <b>₹{getTotalCartAmount() + 2}</b>
             </div>
             <hr />
           </div>
